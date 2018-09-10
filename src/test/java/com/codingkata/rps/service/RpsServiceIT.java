@@ -18,7 +18,7 @@ import static org.junit.Assert.assertThat;
 /**
  * @author Tim Silhan
  */
-public class RpsServiceTest {
+public class RpsServiceIT {
     private RpsService rpsService;
 
     @Before

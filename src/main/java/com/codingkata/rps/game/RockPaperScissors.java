@@ -16,8 +16,8 @@ import java.util.Map;
  * @author Tim Silhan
  */
 public abstract class RockPaperScissors {
-    private final Map<RpsOptions, List<RpsOptions>> ruleSet;
     private final RpsVariants variant;
+    private Map<RpsOptions, List<RpsOptions>> ruleSet;
     private RpsAi ai;
 
     private RpsOptions playerChoice;
@@ -27,7 +27,6 @@ public abstract class RockPaperScissors {
     public RockPaperScissors(RpsVariants variant, RpsAi ai) {
         this.variant = variant;
         this.ai = ai;
-        this.ruleSet = createRuleSet();
     }
 
     /**
@@ -38,12 +37,12 @@ public abstract class RockPaperScissors {
      * @return The result of the game
      */
     public final RpsOutcomes play(RpsOptions playerChoice) {
-        if(playerChoice == null || !ruleSet.keySet().contains(playerChoice)){
+        if (!getRuleSet().keySet().contains(playerChoice)) {
             throw new IllegalArgumentException("The player choice is invalid.");
         }
 
         this.playerChoice = playerChoice;
-        this.aiChoice = ai.makeChoice(getValidOptions());
+        this.aiChoice = getAi().makeChoice(getValidOptions());
         this.outcome = determineWinner();
 
         return outcome;
@@ -61,9 +60,9 @@ public abstract class RockPaperScissors {
     protected abstract Map<RpsOptions, List<RpsOptions>> createRuleSet();
 
     private RpsOutcomes determineWinner() {
-        if (ruleSet.get(this.playerChoice).contains(this.aiChoice)) {
+        if (getRuleSet().get(getPlayerChoice()).contains(getAiChoice())) {
             return RpsOutcomes.PLAYER_WINS;
-        } else if (ruleSet.get(this.aiChoice).contains(this.playerChoice)) {
+        } else if (getRuleSet().get(getAiChoice()).contains(getPlayerChoice())) {
             return RpsOutcomes.AI_WINS;
         } else {
             return RpsOutcomes.DRAW;
@@ -71,10 +70,13 @@ public abstract class RockPaperScissors {
     }
 
     public RpsOptions[] getValidOptions() {
-        return ruleSet.keySet().toArray(new RpsOptions[0]);
+        return getRuleSet().keySet().toArray(new RpsOptions[0]);
     }
 
     public Map<RpsOptions, List<RpsOptions>> getRuleSet() {
+        if (this.ruleSet == null) {
+            this.ruleSet = createRuleSet();
+        }
         return ruleSet;
     }
 
