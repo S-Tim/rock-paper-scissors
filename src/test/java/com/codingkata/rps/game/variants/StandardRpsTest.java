@@ -1,6 +1,5 @@
 package com.codingkata.rps.game.variants;
 
-import com.codingkata.rps.game.RockPaperScissors;
 import com.codingkata.rps.game.RpsOptions;
 import com.codingkata.rps.game.RpsOutcomes;
 import org.junit.Before;
@@ -10,8 +9,10 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.Matchers.arrayContainingInAnyOrder;
 import static org.junit.Assert.assertThat;
 
-public class StandardRpsTest {
-    private RockPaperScissors rps;
+/**
+ * @author Tim Silhan
+ */
+public class StandardRpsTest extends VariantTest{
 
     @Before
     public void createRpsGame() {
@@ -19,12 +20,12 @@ public class StandardRpsTest {
     }
 
     @Test
-    public void playerShouldWinWithRockVsScissor() {
+    public void playerShouldWinWithRockVsScissors() {
         assertGame(RpsOptions.ROCK, RpsOptions.SCISSORS, RpsOutcomes.PLAYER_WINS);
     }
 
     @Test
-    public void playerShouldWinWithScissorVsPaper() {
+    public void playerShouldWinWithScissorsVsPaper() {
         assertGame(RpsOptions.SCISSORS, RpsOptions.PAPER, RpsOutcomes.PLAYER_WINS);
     }
 
@@ -62,13 +63,4 @@ public class StandardRpsTest {
 
         assertThat(options, arrayContainingInAnyOrder(RpsOptions.SCISSORS, RpsOptions.ROCK, RpsOptions.PAPER));
     }
-
-    private void assertGame(RpsOptions playerOption, RpsOptions aiOption, RpsOutcomes outcome) {
-        rps.setAi(options -> aiOption);
-
-        RpsOutcomes result = rps.play(playerOption);
-
-        assertThat(result, equalTo(outcome));
-    }
-
 }

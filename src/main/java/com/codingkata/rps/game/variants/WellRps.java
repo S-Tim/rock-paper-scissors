@@ -10,6 +10,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Well variant of Rock-Paper-Scissors
+ *
+ * @author Tim Silhan
+ */
 public class WellRps extends RockPaperScissors {
     public WellRps() {
         super(RpsVariants.WELL, new RandomAi());

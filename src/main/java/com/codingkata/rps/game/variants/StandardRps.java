@@ -7,6 +7,11 @@ import com.codingkata.rps.game.ai.RandomAi;
 
 import java.util.*;
 
+/**
+ * Standard variant of Rock-Paper-Scissors
+ *
+ * @author Tim Silhan
+ */
 public class StandardRps extends RockPaperScissors {
     public StandardRps() {
         super(RpsVariants.STANDARD, new RandomAi());

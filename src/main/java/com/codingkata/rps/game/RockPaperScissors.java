@@ -5,6 +5,16 @@ import com.codingkata.rps.game.ai.RpsAi;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Abstract base class for Rock-Paper-Scissor games
+ *
+ * <p>A variant of the RPS game is defined by a rule set and a variant enum value.
+ * Subclasses must only implement the {@link #createRuleSet()} method.
+ * Valid options are represented by the key set of the rules.
+ * The state of the last game played is always persisted in the class attributes.</p>
+ *
+ * @author Tim Silhan
+ */
 public abstract class RockPaperScissors {
     private final Map<RpsOptions, List<RpsOptions>> ruleSet;
     private final RpsVariants variant;
@@ -20,7 +30,14 @@ public abstract class RockPaperScissors {
         this.ruleSet = createRuleSet();
     }
 
-    public RpsOutcomes play(RpsOptions playerChoice) {
+    /**
+     * Plays a game using the <tt>Map</tt> of rules provided by {@link #createRuleSet()} and
+     * the <code>playerChoice</code> parameter.
+     *
+     * @param playerChoice The option that is used for the player
+     * @return The result of the game
+     */
+    public final RpsOutcomes play(RpsOptions playerChoice) {
         if(playerChoice == null || !ruleSet.keySet().contains(playerChoice)){
             throw new IllegalArgumentException("The player choice is invalid.");
         }
@@ -32,6 +49,15 @@ public abstract class RockPaperScissors {
         return outcome;
     }
 
+    /**
+     * Creates the set of rules used to play the game.
+     *
+     * <p>Every valid option has to be a key in the map.
+     * The corresponding list of options represents each option
+     * that loses against the key.</p>
+     *
+     * @return The rules map
+     */
     protected abstract Map<RpsOptions, List<RpsOptions>> createRuleSet();
 
     private RpsOutcomes determineWinner() {
