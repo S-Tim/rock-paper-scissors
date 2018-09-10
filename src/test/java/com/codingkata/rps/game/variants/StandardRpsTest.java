@@ -14,53 +14,39 @@ public class StandardRpsTest {
     private RockPaperScissors rps;
 
     @Before
-    public void createRpsGame(){
+    public void createRpsGame() {
         rps = new StandardRps();
     }
 
     @Test
     public void playerShouldWinWithRockVsScissor() {
-        rps.setAi(options -> RpsOptions.SCISSORS);
-
-        RpsOutcomes outcome = rps.play(RpsOptions.ROCK);
-
-        assertThat(outcome, equalTo(RpsOutcomes.PLAYER_WINS));
+        assertGame(RpsOptions.ROCK, RpsOptions.SCISSORS, RpsOutcomes.PLAYER_WINS);
     }
 
     @Test
-    public void playerShouldWinWithScissorVsPaper(){
-        rps.setAi(options -> RpsOptions.PAPER);
-
-        RpsOutcomes outcome = rps.play(RpsOptions.SCISSORS);
-
-        assertThat(outcome, equalTo(RpsOutcomes.PLAYER_WINS));
+    public void playerShouldWinWithScissorVsPaper() {
+        assertGame(RpsOptions.SCISSORS, RpsOptions.PAPER, RpsOutcomes.PLAYER_WINS);
     }
 
     @Test
-    public void AiShouldWinWithPaperVsRock(){
-        rps.setAi(options -> RpsOptions.PAPER);
-
-        RpsOutcomes outcome = rps.play(RpsOptions.ROCK);
-
-        assertThat(outcome, equalTo(RpsOutcomes.AI_WINS));
+    public void AiShouldWinWithPaperVsRock() {
+        assertGame(RpsOptions.ROCK, RpsOptions.PAPER, RpsOutcomes.AI_WINS);
     }
 
     @Test
-    public void GameShouldBeDrawnWithSameOption(){
-        rps.setAi(options -> RpsOptions.ROCK);
-
-        RpsOutcomes outcome = rps.play(RpsOptions.ROCK);
-
-        assertThat(outcome, equalTo(RpsOutcomes.DRAW));
+    public void GameShouldBeDrawnWithSameOption() {
+        for (RpsOptions option : rps.getValidOptions()) {
+            assertGame(option, option, RpsOutcomes.DRAW);
+        }
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void ShouldThrowIllegalArgumentIfOptionInvalid(){
-       rps.play(RpsOptions.WELL);
+    public void ShouldThrowIllegalArgumentIfOptionInvalid() {
+        rps.play(RpsOptions.WELL);
     }
 
     @Test
-    public void GameShouldSaveStateAfterPlay(){
+    public void GameShouldSaveStateAfterPlay() {
         rps.setAi(options -> RpsOptions.ROCK);
 
         RpsOutcomes outcome = rps.play(RpsOptions.PAPER);
@@ -71,9 +57,18 @@ public class StandardRpsTest {
     }
 
     @Test
-    public void ValidOptionsShouldBeRockPaperScissors(){
+    public void ValidOptionsShouldBeRockPaperScissors() {
         RpsOptions[] options = rps.getValidOptions();
 
         assertThat(options, arrayContainingInAnyOrder(RpsOptions.SCISSORS, RpsOptions.ROCK, RpsOptions.PAPER));
     }
+
+    private void assertGame(RpsOptions playerOption, RpsOptions aiOption, RpsOutcomes outcome) {
+        rps.setAi(options -> aiOption);
+
+        RpsOutcomes result = rps.play(playerOption);
+
+        assertThat(result, equalTo(outcome));
+    }
+
 }
