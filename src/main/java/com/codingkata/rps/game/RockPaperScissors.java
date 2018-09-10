@@ -1,18 +1,22 @@
 package com.codingkata.rps.game;
 
+import com.codingkata.rps.game.ai.RpsAi;
+
 import java.util.List;
 import java.util.Map;
 
 public abstract class RockPaperScissors {
     private final Map<RpsOptions, List<RpsOptions>> ruleSet;
     private final RpsVariants variant;
+    private RpsAi ai;
 
     private RpsOptions playerChoice;
     private RpsOptions aiChoice;
     private RpsOutcomes outcome;
 
-    public RockPaperScissors(RpsVariants variant) {
+    public RockPaperScissors(RpsVariants variant, RpsAi ai) {
         this.variant = variant;
+        this.ai = ai;
         this.ruleSet = createRuleSet();
     }
 
@@ -22,15 +26,13 @@ public abstract class RockPaperScissors {
         }
 
         this.playerChoice = playerChoice;
-        this.aiChoice = makeChoice(getValidOptions());
+        this.aiChoice = ai.makeChoice(getValidOptions());
         this.outcome = determineWinner();
 
         return outcome;
     }
 
     protected abstract Map<RpsOptions, List<RpsOptions>> createRuleSet();
-
-    protected abstract RpsOptions makeChoice(RpsOptions[] options);
 
     private RpsOutcomes determineWinner() {
         if (ruleSet.get(this.playerChoice).contains(this.aiChoice)) {
@@ -64,5 +66,13 @@ public abstract class RockPaperScissors {
 
     public RpsOutcomes getOutcome() {
         return outcome;
+    }
+
+    public RpsAi getAi() {
+        return ai;
+    }
+
+    public void setAi(RpsAi ai) {
+        this.ai = ai;
     }
 }
