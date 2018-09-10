@@ -1,10 +1,13 @@
-package com.codingkata.rps.game;
+package com.codingkata.rps.game.variants;
 
+import com.codingkata.rps.game.RockPaperScissors;
+import com.codingkata.rps.game.RpsOptions;
+import com.codingkata.rps.game.RpsVariants;
 import com.codingkata.rps.game.ai.RandomAi;
 
 import java.util.*;
 
-public class StandardRps extends RockPaperScissors{
+public class StandardRps extends RockPaperScissors {
     public StandardRps() {
         super(RpsVariants.STANDARD, new RandomAi());
     }
