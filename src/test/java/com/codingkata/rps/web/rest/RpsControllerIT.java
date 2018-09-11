@@ -2,6 +2,7 @@ package com.codingkata.rps.web.rest;
 
 import com.codingkata.rps.dto.GameRequestDto;
 import com.codingkata.rps.dto.RockPaperScissorsDto;
+import com.codingkata.rps.dto.RpsVariantInfo;
 import com.codingkata.rps.game.RpsOptions;
 import com.codingkata.rps.game.RpsVariants;
 import com.codingkata.rps.web.advice.ErrorResponse;
@@ -15,6 +16,8 @@ import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
+
+import java.util.List;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.*;
@@ -50,6 +53,11 @@ public class RpsControllerIT {
     @Test
     public void wellShouldReturnWell() {
         verifyVariant("/well", RpsVariants.WELL);
+    }
+
+    @Test
+    public void variantsShouldReturnListOfVariantInfo() {
+        restTemplate.getForEntity("http://localhost:" + port + "/variants", List.class);
     }
 
     @Test
