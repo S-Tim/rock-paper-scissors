@@ -22,6 +22,11 @@ import java.util.List;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.*;
 
+/**
+ * Integration test that starts up the server to test with HTTP requests
+ *
+ * @author Tim
+ */
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class RpsControllerIT {
@@ -57,7 +62,9 @@ public class RpsControllerIT {
 
     @Test
     public void variantsShouldReturnListOfVariantInfo() {
-        restTemplate.getForEntity("http://localhost:" + port + "/variants", List.class);
+        ResponseEntity<List> variantInfo =  restTemplate.getForEntity("http://localhost:" + port + "/variants", List.class);
+
+        assertThat(variantInfo.getBody().size(), equalTo(RpsVariants.values().length));
     }
 
     @Test
