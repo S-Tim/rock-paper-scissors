@@ -30,13 +30,13 @@ public class RpsController {
 
     @PostMapping(value = {"/", "/standard"})
     public RockPaperScissorsDto standardGame(@RequestBody GameRequestDto gameRequest) {
-        RockPaperScissors rps = rpsService.playGame(RpsVariants.STANDARD, gameRequest.getPlayerChoice());
+        RockPaperScissors rps = rpsService.playGame(RpsVariants.STANDARD, gameRequest.getChoice());
         return rpsService.getDto(rps);
     }
 
     @PostMapping("/well")
     public RockPaperScissorsDto wellGame(@RequestBody GameRequestDto gameRequest) {
-        RockPaperScissors rps = rpsService.playGame(RpsVariants.WELL, gameRequest.getPlayerChoice());
+        RockPaperScissors rps = rpsService.playGame(RpsVariants.WELL, gameRequest.getChoice());
         return rpsService.getDto(rps);
     }
 

@@ -6,17 +6,17 @@ import com.codingkata.rps.game.RpsOptions;
  * @author Tim Silhan
  */
 public class GameRequestDto {
-    private RpsOptions playerChoice;
+    private RpsOptions choice;
 
     public GameRequestDto() {
 
     }
 
-    public RpsOptions getPlayerChoice() {
-        return playerChoice;
+    public RpsOptions getChoice() {
+        return choice;
     }
 
-    public void setPlayerChoice(RpsOptions playerChoice) {
-        this.playerChoice = playerChoice;
+    public void setChoice(RpsOptions choice) {
+        this.choice = choice;
     }
 }
