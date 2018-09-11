@@ -6,9 +6,13 @@ package com.codingkata.rps.web.advice;
  * @author Tim Silhan
  */
 public class ErrorResponse {
-    public final int status;
-    public final String url;
-    public final String exception;
+    public int status;
+    public String url;
+    public String exception;
+
+    // Needed for serialization
+    private ErrorResponse() {
+    }
 
     public ErrorResponse(int status, String url, String exception) {
         this.status = status;
