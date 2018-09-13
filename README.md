@@ -2,6 +2,7 @@
 An implementation of the Rock-Paper-Scissors game including variants as a RESTful service using spring.
 
 ## Build and Run
+The application was built using Java 8.
 Build the application using the gradle wrapper provided in the repository. Run
 `./gradlew build` or
 `./gradlew.bat build` for Windows.
