@@ -30,24 +30,24 @@ public class StandardRpsTest extends VariantTest{
     }
 
     @Test
-    public void AiShouldWinWithPaperVsRock() {
+    public void aiShouldWinWithPaperVsRock() {
         assertGame(RpsOptions.ROCK, RpsOptions.PAPER, RpsOutcomes.AI_WINS);
     }
 
     @Test
-    public void GameShouldBeDrawnWithSameOption() {
+    public void gameShouldBeDrawnWithSameOption() {
         for (RpsOptions option : rps.getValidOptions()) {
             assertGame(option, option, RpsOutcomes.DRAW);
         }
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void ShouldThrowIllegalArgumentIfOptionInvalid() {
+    public void shouldThrowIllegalArgumentIfOptionInvalid() {
         rps.play(RpsOptions.WELL);
     }
 
     @Test
-    public void GameShouldSaveStateAfterPlay() {
+    public void gameShouldSaveStateAfterPlay() {
         rps.setAi(options -> RpsOptions.ROCK);
 
         RpsOutcomes outcome = rps.play(RpsOptions.PAPER);
@@ -58,7 +58,7 @@ public class StandardRpsTest extends VariantTest{
     }
 
     @Test
-    public void ValidOptionsShouldBeRockPaperScissors() {
+    public void validOptionsShouldBeRockPaperScissors() {
         RpsOptions[] options = rps.getValidOptions();
 
         assertThat(options, arrayContainingInAnyOrder(RpsOptions.SCISSORS, RpsOptions.ROCK, RpsOptions.PAPER));

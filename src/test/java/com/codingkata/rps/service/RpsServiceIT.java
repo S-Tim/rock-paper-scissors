@@ -22,8 +22,8 @@ public class RpsServiceIT {
     private RpsService rpsService;
 
     @Before
-    public void mockRpsFactory() {
-        rpsService = new RpsService(new RpsFactoryImpl());
+    public void createRpsFactory() {
+        rpsService = new RpsService(new RpsFactory());
     }
 
     @Test(expected = IllegalArgumentException.class)

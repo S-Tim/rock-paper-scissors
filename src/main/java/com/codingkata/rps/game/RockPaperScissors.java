@@ -1,6 +1,9 @@
 package com.codingkata.rps.game;
 
 import com.codingkata.rps.game.ai.RpsAi;
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.List;
 import java.util.Map;
@@ -15,9 +18,12 @@ import java.util.Map;
  *
  * @author Tim Silhan
  */
+@Getter
 public abstract class RockPaperScissors {
     private final RpsVariants variant;
+    @Getter(AccessLevel.NONE)
     private Map<RpsOptions, List<RpsOptions>> ruleSet;
+    @Setter
     private RpsAi ai;
 
     private RpsOptions playerChoice;
@@ -78,29 +84,5 @@ public abstract class RockPaperScissors {
             this.ruleSet = createRuleSet();
         }
         return ruleSet;
-    }
-
-    public RpsVariants getVariant() {
-        return variant;
-    }
-
-    public RpsOptions getPlayerChoice() {
-        return playerChoice;
-    }
-
-    public RpsOptions getAiChoice() {
-        return aiChoice;
-    }
-
-    public RpsOutcomes getOutcome() {
-        return outcome;
-    }
-
-    public RpsAi getAi() {
-        return ai;
-    }
-
-    public void setAi(RpsAi ai) {
-        this.ai = ai;
     }
 }

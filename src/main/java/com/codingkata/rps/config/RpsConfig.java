@@ -1,7 +1,6 @@
 package com.codingkata.rps.config;
 
 import com.codingkata.rps.service.RpsFactory;
-import com.codingkata.rps.service.RpsFactoryImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -14,6 +13,6 @@ import org.springframework.context.annotation.Configuration;
 public class RpsConfig {
     @Bean
     RpsFactory rpsFactory() {
-        return new RpsFactoryImpl();
+        return new RpsFactory();
     }
 }

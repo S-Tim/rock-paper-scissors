@@ -2,19 +2,21 @@ package com.codingkata.rps.service;
 
 import com.codingkata.rps.game.RockPaperScissors;
 import com.codingkata.rps.game.RpsVariants;
+import com.codingkata.rps.game.variants.StandardRps;
+import com.codingkata.rps.game.variants.WellRps;
 
 /**
- * Factory interface to choose a correct instance of RockPaperScissors
- * base on the variant.
- *
  * @author Tim Silhan
  */
-public interface RpsFactory {
-    /**
-     * Chooses RockPaperScissor implementation based on the variant.
-     *
-     * @param variant variant of the game.
-     * @return an instance that implements the variant.
-     */
-    RockPaperScissors getRpsInstance(RpsVariants variant);
+public class RpsFactory {
+    public RockPaperScissors getRpsInstance(RpsVariants variant) {
+        switch (variant) {
+            case STANDARD:
+                return new StandardRps();
+            case WELL:
+                return new WellRps();
+            default:
+                throw new IllegalArgumentException("Variant could not be created");
+        }
+    }
 }

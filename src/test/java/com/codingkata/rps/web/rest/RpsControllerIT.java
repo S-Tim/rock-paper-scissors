@@ -2,7 +2,6 @@ package com.codingkata.rps.web.rest;
 
 import com.codingkata.rps.dto.GameRequestDto;
 import com.codingkata.rps.dto.RockPaperScissorsDto;
-import com.codingkata.rps.dto.RpsVariantInfo;
 import com.codingkata.rps.game.RpsOptions;
 import com.codingkata.rps.game.RpsVariants;
 import com.codingkata.rps.web.advice.ErrorResponse;
@@ -20,7 +19,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import java.util.List;
 
 import static org.hamcrest.CoreMatchers.equalTo;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
 
 /**
  * Integration test that starts up the server to test with HTTP requests
@@ -68,7 +67,7 @@ public class RpsControllerIT {
     }
 
     @Test
-    public void IllegalOptionShouldReturnBadRequest() {
+    public void illegalOptionShouldReturnBadRequest() {
         request.setChoice(RpsOptions.WELL);
 
         ResponseEntity<ErrorResponse> response;
@@ -79,7 +78,7 @@ public class RpsControllerIT {
     }
 
     @Test
-    public void NonExistingOptionShouldReturnBadRequest() {
+    public void nonExistingOptionShouldReturnBadRequest() {
         request.setChoice(null);
 
         ResponseEntity<ErrorResponse> response;

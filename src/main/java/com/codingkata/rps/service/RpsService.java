@@ -27,6 +27,14 @@ public class RpsService {
     @Autowired
     public RpsService(RpsFactory rpsFactory) {
         this.rpsFactory = rpsFactory;
+
+        // Only do this once and cache the result
+        ruleSets = new ArrayList<>();
+
+        for (RpsVariants variant : RpsVariants.values()) {
+            RockPaperScissors rps = rpsFactory.getRpsInstance(variant);
+            ruleSets.add(new RpsVariantInfo(rps.getVariant(), rps.getRuleSet()));
+        }
     }
 
     /**
@@ -72,17 +80,6 @@ public class RpsService {
      * @return RpsVariantInfo list with the rules of each variant.
      */
     public List<RpsVariantInfo> getRuleSets() {
-        if (ruleSets == null) {
-            // Only do this once and cache the result because it is
-            // potentially an expensive operation
-            ruleSets = new ArrayList<>();
-
-            for (RpsVariants variant : RpsVariants.values()) {
-                RockPaperScissors rps = rpsFactory.getRpsInstance(variant);
-                ruleSets.add(new RpsVariantInfo(rps.getVariant(), rps.getRuleSet()));
-            }
-        }
-
         return ruleSets;
     }
 }

@@ -2,6 +2,9 @@ package com.codingkata.rps.dto;
 
 import com.codingkata.rps.game.RpsOptions;
 import com.codingkata.rps.game.RpsVariants;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 import java.util.Map;
@@ -11,32 +14,10 @@ import java.util.Map;
  *
  * @author Tim Silhan
  */
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class RpsVariantInfo {
     private RpsVariants variant;
     private Map<RpsOptions, List<RpsOptions>> ruleSet;
-
-    public RpsVariantInfo() {
-
-    }
-
-    public RpsVariantInfo(RpsVariants variant, Map<RpsOptions, List<RpsOptions>> ruleSet) {
-        this.variant = variant;
-        this.ruleSet = ruleSet;
-    }
-
-    public RpsVariants getVariant() {
-        return variant;
-    }
-
-    public void setVariant(RpsVariants variant) {
-        this.variant = variant;
-    }
-
-    public Map<RpsOptions, List<RpsOptions>> getRuleSet() {
-        return ruleSet;
-    }
-
-    public void setRuleSet(Map<RpsOptions, List<RpsOptions>> ruleSet) {
-        this.ruleSet = ruleSet;
-    }
 }

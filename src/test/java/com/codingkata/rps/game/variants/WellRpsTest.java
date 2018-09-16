@@ -19,17 +19,17 @@ public class WellRpsTest extends VariantTest {
     }
 
     @Test
-    public void PlayerShouldWinWithWellVsRock() {
+    public void playerShouldWinWithWellVsRock() {
         assertGame(RpsOptions.WELL, RpsOptions.ROCK, RpsOutcomes.PLAYER_WINS);
     }
 
     @Test
-    public void AiShouldWinWithWellVsScissors() {
+    public void aiShouldWinWithWellVsScissors() {
         assertGame(RpsOptions.SCISSORS, RpsOptions.WELL, RpsOutcomes.AI_WINS);
     }
 
     @Test
-    public void PlayerShouldWinWithPaperVsWell() {
+    public void playerShouldWinWithPaperVsWell() {
         assertGame(RpsOptions.PAPER, RpsOptions.WELL, RpsOutcomes.PLAYER_WINS);
     }
 
@@ -44,19 +44,19 @@ public class WellRpsTest extends VariantTest {
     }
 
     @Test
-    public void AiShouldWinWithPaperVsRock() {
+    public void aiShouldWinWithPaperVsRock() {
         assertGame(RpsOptions.ROCK, RpsOptions.PAPER, RpsOutcomes.AI_WINS);
     }
 
     @Test
-    public void GameShouldBeDrawnWithSameOption() {
+    public void gameShouldBeDrawnWithSameOption() {
         for (RpsOptions option : rps.getValidOptions()) {
             assertGame(option, option, RpsOutcomes.DRAW);
         }
     }
 
     @Test
-    public void GameShouldSaveStateAfterPlay() {
+    public void gameShouldSaveStateAfterPlay() {
         rps.setAi(options -> RpsOptions.WELL);
 
         RpsOutcomes outcome = rps.play(RpsOptions.ROCK);
@@ -67,7 +67,7 @@ public class WellRpsTest extends VariantTest {
     }
 
     @Test
-    public void ValidOptionsShouldBeRockPaperScissorsWell() {
+    public void validOptionsShouldBeRockPaperScissorsWell() {
         RpsOptions[] options = rps.getValidOptions();
 
         assertThat(options, arrayContainingInAnyOrder(RpsOptions.SCISSORS, RpsOptions.ROCK, RpsOptions.PAPER,
